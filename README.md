@@ -1,4 +1,4 @@
-# test-Kart
+# Test-Kart
 
 This system is used to read a kart race log, and export a report with summarized informatios.
 
