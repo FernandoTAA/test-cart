@@ -21,11 +21,14 @@ public class ApplicationLauncher {
     public static void main(String[] args) throws IOException {
         KartRaceComputer kartRaceComputer = KartRaceComputerFactory.create();
 
-        InputStream inputStream = ApplicationLauncher.class.getResourceAsStream("/kart.log");
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
-            kartRaceComputer.compute(line);
+        try (
+                InputStream inputStream = ApplicationLauncher.class.getResourceAsStream("/kart.log");
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        ) {
+            for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
+                kartRaceComputer.compute(line);
+            }
         }
 
         System.out.println(" Rank - Racer Number - Racer Name                     - Laps Completed - Race Time - Average Speed - Best Lap - Amount Of Time After Winner");
